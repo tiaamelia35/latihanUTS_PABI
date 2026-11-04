@@ -1,17 +1,18 @@
 // Menghubungkan library Flutter
 import 'package:flutter/material.dart';
-import 'package:latihanuts_pab/screens/detail_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:latihanuts_pab/providers/auth_provider.dart';
 import 'package:latihanuts_pab/providers/favorite_providers.dart';
 import 'package:latihanuts_pab/screens/galeri_screen.dart';
-
-import 'data/hewan_data.dart';
 
 // Fungsi utama untuk menjalankan aplikasi
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => FavoriteProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => FavoriteProvider()),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+      ],
       child: const MyApp(),
     ),
   );
@@ -40,7 +41,6 @@ class MyApp extends StatelessWidget {
 
       // Menampilkan halaman utama galeri
       home: const GaleriScreen(),
-        // home: DetailScreen(hewan: daftarHewan[1])
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:latihanuts_pab/models/hewan.dart';
 import 'package:latihanuts_pab/providers/favorite_providers.dart';
+import 'package:latihanuts_pab/screens/profile_screen.dart';
 
 // Membuat halaman detail hewan
 class DetailScreen extends StatelessWidget {
@@ -170,6 +171,20 @@ class DetailScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+
+      // Tombol Floating Action Button untuk membuka Profil Pengguna
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.deepPurple.shade100,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProfileScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.person, color: Colors.deepPurple),
       ),
     );
   }

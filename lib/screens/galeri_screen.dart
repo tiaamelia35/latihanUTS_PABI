@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:latihanuts_pab/data/hewan_data.dart';
 import 'package:latihanuts_pab/providers/favorite_providers.dart';
 import 'package:latihanuts_pab/screens/detail_screen.dart';
+import 'package:latihanuts_pab/screens/profile_screen.dart';
 
 // Membuat halaman utama galeri hewan
 class GaleriScreen extends StatelessWidget {
@@ -20,8 +21,8 @@ class GaleriScreen extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Text(
-                'Galeri Hewan',
-              style: const TextStyle(
+              'Galeri Hewan',
+              style: TextStyle(
                 fontSize: 25,
                 color: Colors.red,
                 fontWeight: FontWeight.bold,
@@ -31,7 +32,7 @@ class GaleriScreen extends StatelessWidget {
               alignment: Alignment.center, // kiri; ganti jadi centerRight untuk kanan
               child: Text(
                 'Tia Amelia',
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 14,
                   color: Colors.pink,
                   fontWeight: FontWeight.bold,
@@ -135,6 +136,20 @@ class GaleriScreen extends StatelessWidget {
             ),
           );
         },
+      ),
+
+      // Tombol Floating Action Button untuk membuka Profil Pengguna
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.deepPurple.shade100,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const ProfileScreen(),
+            ),
+          );
+        },
+        child: const Icon(Icons.person, color: Colors.deepPurple),
       ),
     );
   }
