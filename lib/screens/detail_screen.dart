@@ -1,6 +1,8 @@
 // Menghubungkan Flutter dan model Hewan
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:latihanuts_pab/models/hewan.dart';
+import 'package:latihanuts_pab/providers/favorite_providers.dart';
 
 // Membuat halaman detail hewan
 class DetailScreen extends StatelessWidget {
@@ -14,6 +16,9 @@ class DetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final favoriteProvider = context.watch<FavoriteProvider>();
+    final isFavorite = favoriteProvider.isFavorite(hewan.nama);
+
     return Scaffold(
       // Bagian atas halaman
       appBar: AppBar(
@@ -29,15 +34,40 @@ class DetailScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Gambar utama hewan dari internet
-              ClipRRect(      // ngubah border radius, kalo mau hpus aja smpe child trus mulai dari image.network
-                borderRadius: BorderRadius.circular(12),
-                child: Image.network(   // Menampilkan gambar dari internet
-                  hewan.gambar,
-                  width: double.infinity,
-                  height: 300,
-                  fit: BoxFit.cover,
-                ),
+              // Gambar utama hewan dari internet dengan tombol Favorite di kanan bawah
+              Stack(
+                children: [
+                  ClipRRect(      // ngubah border radius, kalo mau hpus aja smpe child trus mulai dari image.network
+                    borderRadius: BorderRadius.circular(12),
+                    child: Image.network(   // Menampilkan gambar dari internet
+                      hewan.gambar,
+                      width: double.infinity,
+                      height: 300,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+
+                  // Tombol Favorite di bagian kanan bawah gambar
+                  Positioned(
+                    bottom: 12,
+                    right: 12,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black.withValues(alpha: 0.4),
+                        shape: BoxShape.circle,
+                      ),
+                      child: IconButton(
+                        icon: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavorite ? Colors.red : Colors.white,
+                        ),
+                        onPressed: () {
+                          context.read<FavoriteProvider>().toggle(hewan.nama);
+                        },
+                      ),
+                    ),
+                  ),
+                ],
               ),
 
               const SizedBox(height: 16),
@@ -48,6 +78,7 @@ class DetailScreen extends StatelessWidget {
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Colors.blue,
                 ),
               ),
 
