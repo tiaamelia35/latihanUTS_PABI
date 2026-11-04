@@ -82,18 +82,6 @@ class DetailScreen extends StatelessWidget {
                 ),
               ),
 
-              // kalo mau ubah tulisan Anjing jdi tengah
-              // Center(
-              //   child: Text(
-              //     hewan.nama,
-              //     textAlign: TextAlign.center,
-              //     style: const TextStyle(
-              //       fontSize: 24,
-              //       fontWeight: FontWeight.bold,
-              //     ),
-              //   ),
-              // ),
-
               const SizedBox(height: 8),
 
               // Jenis hewan
